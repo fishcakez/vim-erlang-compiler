@@ -19,11 +19,8 @@ if exists(":CompilerSet") != 2
     command -nargs=* CompilerSet setlocal <args>
 endif
 
-let s:erlang_check_file = expand("<sfile>:p:h") . "/erlang_check.erl"
-execute "CompilerSet makeprg=" . fnameescape(s:erlang_check_file)
-unlet s:erlang_check_file
-
-CompilerSet errorformat=%f:%l:\ %tarning:\ %m,%f:%l:\ %m,%f:\ %m
+CompilerSet makeprg=syntaxerl
+CompilerSet errorformat=%W%f:%l:\ warning:\ %m,%E%f:%l:\ %m,
 
 let &cpo = s:cpo_save
 unlet s:cpo_save

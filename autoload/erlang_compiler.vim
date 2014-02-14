@@ -18,9 +18,12 @@ sign define ErlangWarning text=>> texthl=Todo
 function erlang_compiler#EnableShowErrors()
     augroup erlang_compiler
         autocmd!
-        autocmd BufWritePost *.erl call erlang_compiler#AutoRun(expand("<abuf>")+0)
-        autocmd BufDelete *.erl,*.hrl call erlang_compiler#Unload(expand("<abuf>")+0)
-        autocmd CursorHold,CursorMoved *.erl,*.hrl
+        autocmd BufWritePost *.erl,*.hrl,*.app,*.app.src,*.config,*.rel,*.script,*.spec
+                    \ call erlang_compiler#AutoRun(expand("<abuf>")+0)
+        autocmd BufDelete *.erl,*.hrl,*.app,*.app.src,*.config,*.rel,*.script,*.spec
+                    \ call erlang_compiler#Unload(expand("<abuf>")+0)
+        autocmd CursorHold,CursorMoved
+                    \ *.erl,*.hrl,*.app,*.app.src,*.config,*.rel,*.script,*.spec
                     \ call erlang_compiler#EchoLineError(expand("<abuf>")+0, getpos("."))
     augroup END
 endfunction
